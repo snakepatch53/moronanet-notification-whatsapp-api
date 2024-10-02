@@ -19,10 +19,10 @@
             class='w-full flex flex-col justify-center items-center mt-10'
             id='qrCodeContainer'
         ></div>
-        <div class="p-4 space-y-2 w-full max-w-[700px] mx-auto mt-1">
-            <h3 class='text-center font-bold mt-10'>REGISTRO DE ACTIVIDAD</h3>
+        <h3 class='text-center font-bold mt-10'>REGISTRO DE ACTIVIDAD</h3>
+        <div id="logs-container" class="p-4 space-y-2 w-full max-w-[700px] mx-auto">
             {{#each logs}}
-                <div id="logs-container" class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
+                <div class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
                     <div class="relative">
                         <img src="/message-icon.png" class="flex h-8 aspect-square object-contain p-1.5 items-center justify-center rounded-full bg-gray-100"></img>
                     </div>

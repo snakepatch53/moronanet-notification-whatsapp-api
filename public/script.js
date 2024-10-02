@@ -25,7 +25,7 @@ socket.on('qrCode', (qr) => {
 socket.on('log-response', (data) => {
     const content =
         `
-        <div id="logs-container" class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
+        <div class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
             <div class="relative">
                 <img src="/message-icon.png" class="flex h-8 aspect-square object-contain p-1.5 items-center justify-center rounded-full bg-gray-100"></img>
             </div>
