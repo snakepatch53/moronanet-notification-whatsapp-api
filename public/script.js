@@ -2,11 +2,10 @@ const socket = io(); // Conexión al servidor de WebSocket
 const qrCodeContainer = document.getElementById('qrCodeContainer');
 
 if (!qrCodeLoaded) {
-    qrCodeContainer.innerHTML = `<p>WhatsApp está conectado o no hay QR
-disponible en este momento.</p>`;
+    qrCodeContainer.innerHTML = `<p>Sessión Iniciada ✅</p>`;
 } else {
     qrCodeContainer.innerHTML = `
-        <h1 class='uppercase font-bold'>Escanee el qr</h1>
+        <h1 class='uppercase font-bold'>ESCANEE EL CÓDIGO QR</h1>
         <img src="${qrCodeLoaded}" alt="QR Code" />
     `;
 }
@@ -14,12 +13,11 @@ disponible en este momento.</p>`;
 socket.on('qrCode', (qr) => {
     console.log('QR Code received', qr);
     if (!qr) {
-        qrCodeContainer.innerHTML = `<p>WhatsApp está conectado o no hay QR
-disponible en este momento.</p>`;
+        qrCodeContainer.innerHTML = `<p>Sessión Iniciada ✅</p>`;
         return;
     }
     qrCodeContainer.innerHTML = `
-        <h1 class='uppercase font-bold'>Escanee el qr</h1>
+        <h1 class='uppercase font-bold'>ESCANEE EL CÓDIGO QR</h1>
         <img src="${qr}" alt="QR Code" />
     `;
 });

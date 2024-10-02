@@ -75,12 +75,12 @@ export class WhatsappService {
     }
 
     async sendMessageToContacts(
-        token: string,
+        secret: string,
         message: string,
     ): Promise<string> {
-        const MY_SECRET_TOKEN =
-            'uzf7fqKuXmjkxL7nKEKk7weX1NfVlh8tu4tECTEgfGryjiq8who29YAl4k3N72MI';
-        if (token !== MY_SECRET_TOKEN) return 'Invalid token';
+        const MY_SECRET_KEY = process.env.AUTH_SECRET_KEY;
+        if (!secret) return 'Secret key is required';
+        if (secret !== MY_SECRET_KEY) return 'Invalid secret key';
         if (!message) return 'Message is required';
 
         // Verifica si el cliente está inicializado
@@ -106,5 +106,15 @@ export class WhatsappService {
         }
 
         return 'Messages sent successfully';
+    }
+
+    async signOutWhatsapp(secret: string): Promise<string> {
+        const MY_SECRET_KEY = process.env.AUTH_SECRET_KEY;
+        if (!secret) return 'Secret key is required';
+        if (secret !== MY_SECRET_KEY) return 'Invalid secret key';
+
+        this.client.destroy();
+        this.qrGateway.sendLog('Whatsapp', 'Sesión cerrada');
+        return 'Client destroyed';
     }
 }

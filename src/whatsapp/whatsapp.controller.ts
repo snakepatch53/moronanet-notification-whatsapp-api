@@ -22,16 +22,19 @@ export class WhatsappController {
 
     @Get('send-message')
     async sendMessage(
-        @Query('token') token: string,
+        @Query('secret') secret: string,
         @Query('message') message: string,
     ) {
         // Validar que se reciban ambos parámetros
-        if (!token || !message) {
+        if (!secret || !message) {
             throw new BadRequestException(
-                'Both token and message are required',
+                'Se requieren los parámetros secret y message',
             );
         }
 
-        return await this.whatsappService.sendMessageToContacts(token, message);
+        return await this.whatsappService.sendMessageToContacts(
+            secret,
+            message,
+        );
     }
 }
