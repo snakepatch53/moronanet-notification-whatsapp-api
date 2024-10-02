@@ -16,7 +16,7 @@ dotenv.config();
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME,
             entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-            synchronize: true, // Solo para desarrollo
+            synchronize: process.env.PROD === 'true' ? false : true,
         }),
         // configurar websocket
 
