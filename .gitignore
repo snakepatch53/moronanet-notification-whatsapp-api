@@ -1,5 +1,6 @@
 #whatsapp adds
 /.wwebjs_auth
+/public/main.css
 
 # compiled output
 /dist
