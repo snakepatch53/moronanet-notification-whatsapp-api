@@ -57,6 +57,14 @@ export class WhatsappService {
             console.error('Authentication failed:', message);
         });
 
+        this.client.on('disconnected', (reason) => {
+            this.qrCode = null;
+            this.qrGateway.sendQrCode(null);
+            this.qrGateway.sendLog('Whatsapp', 'Cliente desconectado');
+            console.log('Client was logged out', reason);
+            this.client.initialize();
+        });
+
         this.client.initialize();
     }
 
@@ -93,7 +101,7 @@ export class WhatsappService {
                 await this.client.sendMessage(chatId, message);
                 this.qrGateway.sendLog(
                     'Whatsapp',
-                    `Mensaje enviado a: ${contact.celular}, Mensaje: ${message}`,
+                    `Mensaje enviado a: ${contact.nombre}, Mensaje: ${message}`,
                 );
                 console.log('Sending message to:', chatId);
             } catch (error) {
