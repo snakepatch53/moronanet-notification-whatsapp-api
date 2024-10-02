@@ -1,0 +1,42 @@
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='shortcut icon' href='/icon.png' type='image/x-icon' />
+        <title>WhatsApp QR Code</title>
+        <script src='/socket.io/socket.io.js'></script>
+        <link href='/main.css' rel='stylesheet' />
+    </head>
+    <body>
+
+        <img
+            class='w-full max-w-60 mx-auto'
+            src='/logo.png'
+            alt='Logo Moronanet'
+        />
+
+        <div
+            class='w-full flex flex-col justify-center items-center mt-10'
+            id='qrCodeContainer'
+        ></div>
+        <div class="p-4 space-y-2 w-full max-w-[700px] mx-auto mt-1">
+            <h3 class='text-center font-bold mt-10'>REGISTRO DE ACTIVIDAD</h3>
+            {{#each logs}}
+                <div class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
+                    <div class="relative">
+                        <img src="/message-icon.png" class="flex h-8 aspect-square object-contain p-1.5 items-center justify-center rounded-full bg-gray-100"></img>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium">{{this.detail}}</p>
+                        <p class="text-xs text-gray-500">{{this.dateTime}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    </body>
+    <script>
+        const qrCodeLoaded = '{{qrCode}}';
+    </script>
+    <script src='/script.js'></script>
+</html>
