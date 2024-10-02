@@ -18,7 +18,7 @@ export class WhatsappService {
         private contactRepository: Repository<ContactoEntity>,
         @InjectRepository(LogEntity)
         private logRepository: Repository<LogEntity>,
-        private qrGateway: QrGateway,
+        private readonly qrGateway: QrGateway,
     ) {
         this.initialize();
     }
@@ -27,6 +27,10 @@ export class WhatsappService {
         // const sessionData = await this.loadSessionFromDb();
         this.client = new Client({
             authStrategy: new LocalAuth(),
+            puppeteer: {
+                headless: false, // Puedes ponerlo en true si no necesitas ver el navegador
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            },
         });
 
         this.client.on('qr', async (qr) => {
@@ -121,7 +125,9 @@ export class WhatsappService {
         if (!secret) return 'Secret key is required';
         if (secret !== MY_SECRET_KEY) return 'Invalid secret key';
 
-        this.client.destroy();
+        await this.client.logout();
+        await this.client.destroy();
+        await this.client.initialize();
         this.qrGateway.sendLog('Whatsapp', 'Sesión cerrada');
         return 'Client destroyed';
     }

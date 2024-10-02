@@ -1,7 +1,9 @@
 import {
     BadRequestException,
+    Body,
     Controller,
     Get,
+    Post,
     Query,
     Render,
 } from '@nestjs/common';
@@ -36,5 +38,13 @@ export class WhatsappController {
             secret,
             message,
         );
+    }
+
+    @Post('logout')
+    async logout(@Body() body: { secret: string }) {
+        const { secret } = body;
+        if (!secret)
+            throw new BadRequestException('Se requiere el parámetro secret');
+        return await this.whatsappService.signOutWhatsapp(secret);
     }
 }

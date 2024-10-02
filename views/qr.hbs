@@ -34,6 +34,16 @@
             {{/each}}
         </div>
     </div>
+
+    <form class="hidden fixed inset-0 min-h-screen justify-center items-center bg-black bg-opacity-50 z-50" id="logout-modal">
+        <div class="bg-white w-96 py-4 px-10 rounded-lg shadow-lg">
+            <h3 class="text-center font-bold">Ingrese el secret por favor</h3>
+            <input type="password" class="w-full px-2 py-1 mt-4 border rounded" name="secret" />
+            <button class="block bg-green-500 text-white px-4 py-2 rounded-lg mt-4 mx-auto" id="btn-logout">
+                Confirmar
+            </button>
+        </div>
+    </form>
     </body>
     <script>
         const qrCodeLoaded = '{{qrCode}}';
