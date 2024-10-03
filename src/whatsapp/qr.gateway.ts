@@ -18,21 +18,23 @@ export class QrGateway implements OnGatewayConnection {
         private logRepository: Repository<LogEntity>,
     ) {}
 
-    handleConnection(client: any) {
+    async handleConnection(client: any) {
         console.log('Socket client connected:', client.id);
+        const logs = await this.logRepository.find();
+        this.server.emit('log-response', logs);
     }
 
     sendQrCode(qr: string) {
         this.server.emit('qrCode', qr); // Enviará el QR a todos los clientes conectados
     }
 
-    sendLog(name: string, detail: string) {
-        const newLog = {
+    async sendLog(name: string, detail: string) {
+        await this.logRepository.save({
             nombre: name,
             detail,
-            dateTime: new Date().toISOString(),
-        };
-        this.server.emit('log-response', newLog); // Enviará el QR a todos los clientes conectados
-        this.logRepository.save(newLog);
+            dateTime: new Date(),
+        });
+        const logs = await this.logRepository.find();
+        this.server.emit('log-response', logs);
     }
 }

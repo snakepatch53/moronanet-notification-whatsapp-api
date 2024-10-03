@@ -12,5 +12,5 @@ export class LogEntity {
     detail: string;
 
     @Column()
-    dateTime: string;
+    dateTime: Date;
 }

@@ -69,18 +69,22 @@ socket.on('qrCode', (qr) => {
         <img src="${qr}" alt="QR Code" />
     `;
 });
+
 socket.on('log-response', (data) => {
-    const content =
-        `
-        <div class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
-            <div class="relative">
-                <img src="/message-icon.png" class="flex h-8 aspect-square object-contain p-1.5 items-center justify-center rounded-full bg-gray-100"></img>
+    const content = data.map((row) => {
+        const fecha = moment(new Date(row.dateTime)).fromNow();
+        const fechaCapitalize = fecha.charAt(0).toUpperCase() + fecha.slice(1);
+        return `
+            <div class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
+                <div class="relative">
+                    <img src="/message-icon.png" class="flex h-8 aspect-square object-contain p-1.5 items-center justify-center rounded-full bg-gray-100"></img>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">${row.detail}</p>
+                    <p class="text-xs text-gray-500">${fechaCapitalize}</p>
+                </div>
             </div>
-            <div class="flex-1">
-                <p class="text-sm font-medium">${data.detail}</p>
-                <p class="text-xs text-gray-500">${data.dateTime}</p>
-            </div>
-        </div>
-    ` + $logsContainer.innerHTML;
-    $logsContainer.innerHTML = content;
+        `;
+    });
+    $logsContainer.innerHTML = content.join('');
 });

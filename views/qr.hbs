@@ -3,9 +3,14 @@
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <link rel='shortcut icon' href='/icon.png' type='image/x-icon' />
+        <link href='/main.css' rel='stylesheet' />
         <title>WhatsApp QR Code</title>
         <script src='/socket.io/socket.io.js'></script>
-        <link href='/main.css' rel='stylesheet' />
+         <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/locale/es.js"></script>
+         <script>
+            moment.locale('es');
+         </script>
     </head>
     <body>
 
@@ -20,19 +25,7 @@
             id='qrCodeContainer'
         ></div>
         <h3 class='text-center font-bold mt-10'>REGISTRO DE ACTIVIDAD</h3>
-        <div id="logs-container" class="p-4 space-y-2 w-full max-w-[700px] mx-auto">
-            {{#each logs}}
-                <div class="flex items-start space-x-4 shadow rounded-lg p-5 bg-gray-50 border">
-                    <div class="relative">
-                        <img src="/message-icon.png" class="flex h-8 aspect-square object-contain p-1.5 items-center justify-center rounded-full bg-gray-100"></img>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-sm font-medium">{{this.detail}}</p>
-                        <p class="text-xs text-gray-500">{{this.dateTime}}</p>
-                    </div>
-                </div>
-            {{/each}}
-        </div>
+        <div id="logs-container" class="p-4 space-y-2 w-full max-w-[700px] mx-auto"></div>
     </div>
 
     <form class="hidden fixed inset-0 min-h-screen justify-center items-center bg-black bg-opacity-50 z-50" id="logout-modal">
