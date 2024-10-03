@@ -28,7 +28,7 @@ export class WhatsappService {
         this.client = new Client({
             authStrategy: new LocalAuth(),
             puppeteer: {
-                headless: false, // Puedes ponerlo en true si no necesitas ver el navegador
+                headless: true, // Puedes ponerlo en true si no necesitas ver el navegador
                 args: ['--no-sandbox', '--disable-setuid-sandbox'],
             },
         });
@@ -66,7 +66,6 @@ export class WhatsappService {
             this.qrGateway.sendQrCode(null);
             this.qrGateway.sendLog('Whatsapp', 'Cliente desconectado');
             console.log('Client was logged out', reason);
-            this.client.initialize();
         });
 
         this.client.initialize();
